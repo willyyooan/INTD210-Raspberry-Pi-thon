@@ -186,15 +186,10 @@ def taskFailed():
     print("BOOM! You died :(")
     if isGameLose == True:
         sh.set_pixels(loseScreen)
-        sleep(qrtrSec)
-
-
-
-
-
-
-
-     
+        sleep(halfSec)
+        sh.set_pixels(loseScreen)
+        sleep(halfSec)
+        sh.set_pixels(loseScreen)
 
 ##GAME##
 
@@ -213,7 +208,7 @@ while True:
       break
 
 
-taskArr = ["task_1", "task_2", "task_3", "task_4", "task_5", "task_6", "task_7", "task_8", "task_9", "task_10"]
+taskArr = ["task_1"]#, "task_2", "task_3", "task_4", "task_5", "task_6", "task_7", "task_8", "task_9", "task_10"]
 random.shuffle(taskArr)
 print(taskArr[0])
 
@@ -221,24 +216,78 @@ if taskArr[0] == "task_1":
     sh.set_pixels(triangleScreen)
     while isGameOn == True:
         for e in sh.stick.get_events():
-            if e.action == "pressed" and "up"
-elif taskArr[0] == "task_2":
-    sh.set_pixels(squareScreen)
-elif taskArr[0] == "task_3":
-    sh.set_pixels(circleScreen)
-elif taskArr[0] == "task_4":
-    sh.set_pixels(blueScreen)
-elif taskArr[0] == "task_5":
-    sh.set_pixels(twoSquareScreen)
-elif taskArr[0] == "task_6":
-    sh.set_pixels(yellowScreen)
-elif taskArr[0] == "task_7":
-    sh.set_pixels(orangeScreen)
-elif taskArr[0] == "task_8":
-    sh.set_pixels(crossScreen)
-elif taskArr[0] == "task_9":
-    sh.set_pixels(twoLinesScreen)
-elif taskArr[0] == "task_10":
-    sh.set_pixels(xScreen)
+            if e.action == "pressed" and "middle" or "down" or "left" or "right":
+                print("task failed")
+                isGameLose = True
+                taskFailed()
+            elif e.action == "pressed" and "up":
+                print("task done")
+                
+        
+
+
+
+# elif taskArr[0] == "task_2":
+#     sh.set_pixels(squareScreen)
+#     while isGameOn == True:
+#         for e in sh.stick.get_events():
+#             if e.action == "pressed" and "up":
+#                 print("task done, moving on")
+
+# elif taskArr[0] == "task_3":
+#     sh.set_pixels(circleScreen)
+#     while isGameOn == True:
+#         for e in sh.stick.get_events():
+#             if e.action == "pressed" and "up":
+#                 print("task done, moving on")
+
+# elif taskArr[0] == "task_4":
+#     sh.set_pixels(blueScreen)
+#     while isGameOn == True:
+#         for e in sh.stick.get_events():
+#             if e.action == "pressed" and "up":
+#                 print("task done, moving on")
+
+# elif taskArr[0] == "task_5":
+#     sh.set_pixels(twoSquareScreen)
+#     while isGameOn == True:
+#         for e in sh.stick.get_events():
+#             if e.action == "pressed" and "up":
+#                 print("task done, moving on")
+
+# elif taskArr[0] == "task_6":
+#     sh.set_pixels(yellowScreen)
+#     while isGameOn == True:
+#         for e in sh.stick.get_events():
+#             if e.action == "pressed" and "up":
+#                 print("task done, moving on")
+
+# elif taskArr[0] == "task_7":
+#     sh.set_pixels(orangeScreen)
+#     while isGameOn == True:
+#         for e in sh.stick.get_events():
+#             if e.action == "pressed" and "up":
+#                 print("task done, moving on")
+
+# elif taskArr[0] == "task_8":
+#     sh.set_pixels(crossScreen)
+#     while isGameOn == True:
+#         for e in sh.stick.get_events():
+#             if e.action == "pressed" and "up":
+#                 print("task done, moving on")
+
+# elif taskArr[0] == "task_9":
+#     sh.set_pixels(twoLinesScreen)
+#     while isGameOn == True:
+#         for e in sh.stick.get_events():
+#             if e.action == "pressed" and "up":
+#                 print("task done, moving on")
+
+# elif taskArr[0] == "task_10":
+#     sh.set_pixels(xScreen)
+#     while isGameOn == True:
+#         for e in sh.stick.get_events():
+#             if e.action == "pressed" and "up":
+#                 print("task done, moving on")
 
     
