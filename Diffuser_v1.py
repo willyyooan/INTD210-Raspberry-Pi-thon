@@ -169,11 +169,6 @@ halfSec = 0.5
 fullSec = 1
 
 ##FUNCTIONS##
-def determineNextTask():
-    random.shuffle(taskArr)
-    print(taskArr[0])
-
-
 
 def nextTask():
     print("next task!")
@@ -213,7 +208,7 @@ while True:
 
 taskArr = ["task_1", "task_2", "task_3", "task_4", "task_5"]#, "task_6", "task_7", "task_8", "task_9", "task_10"]
 random.shuffle(taskArr)
-print(taskArr[0])
+print(taskArr[0:4])
 
 if taskArr[0] == "task_1":
     while isGameOn == True:
@@ -221,10 +216,7 @@ if taskArr[0] == "task_1":
         for e in sh.stick.get_events():
             if e.action == "pressed" and e.direction == "up":
                 print("task done")
-                random.shuffle(taskArr)
-                print(taskArr[0])
-                
-                
+                print(taskArr[1])
             if e.action == "pressed" and e.direction != "up":
                 print("task failed")
                 isGameLose = True
@@ -236,8 +228,7 @@ elif taskArr[0] == "task_2":
         for e in sh.stick.get_events():
             if e.action == "pressed" and e.direction == "up":
                 print("task done")
-                random.shuffle(taskArr)
-                print(taskArr[0])
+                print(taskArr[1])
             if e.action == "pressed" and e.direction != "up":
                 print("task failed")
                 isGameLose = True
@@ -249,8 +240,7 @@ elif taskArr[0] == "task_3":
         for e in sh.stick.get_events():
             if e.action == "pressed" and e.direction == "up":
                 print("task done")
-                random.shuffle(taskArr)
-                print(taskArr[0])
+                print(taskArr[1])
             if e.action == "pressed" and e.direction != "up":
                 print("task failed")
                 isGameLose = True
@@ -262,8 +252,7 @@ elif taskArr[0] == "task_4":
         for e in sh.stick.get_events():
             if e.action == "pressed" and e.direction == "up":
                 print("task done")
-                random.shuffle(taskArr)
-                print(taskArr[0])
+                print(taskArr[1])
             if e.action == "pressed" and e.direction != "up":
                 print("task failed")
                 isGameLose = True
@@ -275,8 +264,7 @@ elif taskArr[0] == "task_5":
         for e in sh.stick.get_events():
             if e.action == "pressed" and e.direction == "up":
                 print("task done")
-                random.shuffle(taskArr)
-                print(taskArr[0])
+                print(taskArr[1])
             if e.action == "pressed" and e.direction != "up":
                 print("task failed")
                 isGameLose = True
