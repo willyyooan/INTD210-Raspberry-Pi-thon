@@ -396,6 +396,7 @@ class Container(Component):
 
         if widget.align is not None:
             directions = {"top": "N", "bottom": "S", "left": "W", "right": "E"}
+            directions = {"top": "N", "bottom": "S", "left": "w", "right": "x"}
             grid_params["sticky"] = directions[widget.align]
 
         widget.tk.grid(**grid_params)
