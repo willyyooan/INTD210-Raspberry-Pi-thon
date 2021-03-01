@@ -184,11 +184,8 @@ def taskDone():
 
 def taskFailed():
     print("BOOM! You died :(")
-    if isGameLose == True:
-        sh.set_pixels(loseScreen)
-        sleep(halfSec)
-        sh.set_pixels(loseScreen)
-        sleep(halfSec)
+    while isGameLose == True:
+        isGameOn = False
         sh.set_pixels(loseScreen)
 
 ##GAME##
@@ -199,7 +196,7 @@ while True:
         #MVP 1: press the joystick to begin 
         #MVP 2: MQTT, the GUI will start the game
         for e in sh.stick.get_events():
-            if e.action == "pressed" and "middle":
+            if e.action == "pressed" and e.direction == "middle":
                 sh.clear()
                 isGameOn = True
                 break
@@ -213,18 +210,15 @@ random.shuffle(taskArr)
 print(taskArr[0])
 
 if taskArr[0] == "task_1":
-    sh.set_pixels(triangleScreen)
     while isGameOn == True:
+        sh.set_pixels(triangleScreen)
         for e in sh.stick.get_events():
-            if e.action == "pressed" and "middle" or "down" or "left" or "right":
+            if e.action == "pressed" and e.direction == "up":
+                print("task done")
+            if e.action == "pressed" and e.direction != "up":
                 print("task failed")
                 isGameLose = True
                 taskFailed()
-            elif e.action == "pressed" and "up":
-                print("task done")
-                
-        
-
 
 
 # elif taskArr[0] == "task_2":
