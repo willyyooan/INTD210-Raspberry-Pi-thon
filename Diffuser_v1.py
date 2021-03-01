@@ -169,7 +169,11 @@ halfSec = 0.5
 fullSec = 1
 
 ##FUNCTIONS##
-#def determineNextTask()
+def determineNextTask():
+    random.shuffle(taskArr)
+    print(taskArr[0])
+
+
 
 def nextTask():
     print("next task!")
@@ -188,6 +192,8 @@ def taskFailed():
         isGameOn = False
         sh.set_pixels(loseScreen)
 
+
+
 ##GAME##
 
 while True:
@@ -205,7 +211,7 @@ while True:
       break
 
 
-taskArr = ["task_1"]#, "task_2", "task_3", "task_4", "task_5", "task_6", "task_7", "task_8", "task_9", "task_10"]
+taskArr = ["task_1", "task_2", "task_3", "task_4", "task_5"]#, "task_6", "task_7", "task_8", "task_9", "task_10"]
 random.shuffle(taskArr)
 print(taskArr[0])
 
@@ -215,39 +221,66 @@ if taskArr[0] == "task_1":
         for e in sh.stick.get_events():
             if e.action == "pressed" and e.direction == "up":
                 print("task done")
+                random.shuffle(taskArr)
+                print(taskArr[0])
+                
+                
             if e.action == "pressed" and e.direction != "up":
                 print("task failed")
                 isGameLose = True
                 taskFailed()
 
+elif taskArr[0] == "task_2":
+    while isGameOn == True:
+        sh.set_pixels(squareScreen)
+        for e in sh.stick.get_events():
+            if e.action == "pressed" and e.direction == "up":
+                print("task done")
+                random.shuffle(taskArr)
+                print(taskArr[0])
+            if e.action == "pressed" and e.direction != "up":
+                print("task failed")
+                isGameLose = True
+                taskFailed()
 
-# elif taskArr[0] == "task_2":
-#     sh.set_pixels(squareScreen)
-#     while isGameOn == True:
-#         for e in sh.stick.get_events():
-#             if e.action == "pressed" and "up":
-#                 print("task done, moving on")
+elif taskArr[0] == "task_3":
+    sh.set_pixels(circleScreen)
+    while isGameOn == True:
+        for e in sh.stick.get_events():
+            if e.action == "pressed" and e.direction == "up":
+                print("task done")
+                random.shuffle(taskArr)
+                print(taskArr[0])
+            if e.action == "pressed" and e.direction != "up":
+                print("task failed")
+                isGameLose = True
+                taskFailed()
 
-# elif taskArr[0] == "task_3":
-#     sh.set_pixels(circleScreen)
-#     while isGameOn == True:
-#         for e in sh.stick.get_events():
-#             if e.action == "pressed" and "up":
-#                 print("task done, moving on")
+elif taskArr[0] == "task_4":
+    sh.set_pixels(blueScreen)
+    while isGameOn == True:
+        for e in sh.stick.get_events():
+            if e.action == "pressed" and e.direction == "up":
+                print("task done")
+                random.shuffle(taskArr)
+                print(taskArr[0])
+            if e.action == "pressed" and e.direction != "up":
+                print("task failed")
+                isGameLose = True
+                taskFailed()
 
-# elif taskArr[0] == "task_4":
-#     sh.set_pixels(blueScreen)
-#     while isGameOn == True:
-#         for e in sh.stick.get_events():
-#             if e.action == "pressed" and "up":
-#                 print("task done, moving on")
-
-# elif taskArr[0] == "task_5":
-#     sh.set_pixels(twoSquareScreen)
-#     while isGameOn == True:
-#         for e in sh.stick.get_events():
-#             if e.action == "pressed" and "up":
-#                 print("task done, moving on")
+elif taskArr[0] == "task_5":
+    sh.set_pixels(twoSquareScreen)
+    while isGameOn == True:
+        for e in sh.stick.get_events():
+            if e.action == "pressed" and e.direction == "up":
+                print("task done")
+                random.shuffle(taskArr)
+                print(taskArr[0])
+            if e.action == "pressed" and e.direction != "up":
+                print("task failed")
+                isGameLose = True
+                taskFailed()
 
 # elif taskArr[0] == "task_6":
 #     sh.set_pixels(yellowScreen)
@@ -284,4 +317,5 @@ if taskArr[0] == "task_1":
 #             if e.action == "pressed" and "up":
 #                 print("task done, moving on")
 
-    
+
+print("out of loop")   
