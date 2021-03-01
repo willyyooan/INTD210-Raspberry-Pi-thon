@@ -395,7 +395,6 @@ class Container(Component):
             grid_params["rowspan"] = widget.grid[3]
 
         if widget.align is not None:
-            directions = {"top": "N", "bottom": "S", "left": "W", "right": "E"}
             directions = {"top": "N", "bottom": "S", "left": "w", "right": "x"}
             grid_params["sticky"] = directions[widget.align]
 
