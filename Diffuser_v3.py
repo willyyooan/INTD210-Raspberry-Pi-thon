@@ -159,7 +159,7 @@ xScreen = [
     w, x, x, x, x, x, x, w
 ]
 
-##VARIABLES, BOOLEANS, AND LISTS
+##VARIABLES, BOOLEANS, AND LISTS##
 global isGameOn
 global isGameLose
 global isGameWin
@@ -178,19 +178,20 @@ up = 'up'
 dn = 'down'
 lt = 'left'
 rt = 'right'
-md = 'middle'
 
 squareSeq = [up, dn, lt, rt]
 triangleSeq = [up, lt, rt]
-twoSquareSeq = [up, dn, md, md, lt, rt]
+twoSquareSeq = [up, dn, up, up, lt, rt]
 yellowSeq = [up, up, up, up, dn, dn, dn, dn]
 crossSeq = [dn, dn, dn, dn, dn, dn, up, up, up, lt, lt, lt, rt, rt, rt, rt, rt, rt]
 xSeq = [up, dn, dn, lt, lt, lt, rt, rt, rt, rt]
 
+btnSeq = []
 
 ##FUNCTIONS##
 def nextTask():
     sh.clear()
+    del btnSeq[:] #resets list
     random.shuffle(taskArr)
     print(taskArr[0])
     
@@ -205,11 +206,13 @@ def taskDone():
     taskCount += 1
     sleep(0.5)
     
+    
 
 def taskFailed():
     global isGameLose
     isGameLose = True
     print("BOOM! You died :(")
+    del btnSeq[:] #resets list
     while isGameLose == True:
         global isGameOn
         isGameOn = False
@@ -235,52 +238,72 @@ def task(i):
     sh.set_pixels(i)
     if i == triangleScreen:
         for e in sh.stick.get_events():
-            if e.action == "pressed" and e.direction == "middle":           #press 3 times
+            if e.action == "pressed":
+                n = e.direction
+                btnSeq.append(n) #appends the direction to a list (btnSeq)
+                if e.action == "pressed" and e.direction == "middle": #press middle to confirm. this will add "middle" to the btnSeq list
+                    btnSeq.pop() #gets rid of the "middle" appended to the btnSeq list. We don't need it.
+                    if btnSeq == triangleSeq: #compares btnSeq list (what you did on the joystick) to a pre-described task sequence (see variables)
+                        taskDone() #if it matches
+                        nextTask()
+                    else:
+                        isGameLose = True #if it doesn't match
+                        taskFailed()
+    elif i == squareScreen:
+        for e in sh.stick.get_events():
+            if e.action == "pressed":
+                n = e.direction
+                btnSeq.append(n)
+                if e.action == "pressed" and e.direction == "middle":
+                    btnSeq.pop()
+                    if btnSeq == squareSeq:
+                        taskDone()
+                        nextTask()
+                    else:
+                        isGameLose = True
+                        taskFailed()
+    elif i == circleScreen:
+        for e in sh.stick.get_events():
+            if e.action == "pressed" and e.direction == "middle":
                 taskDone()
                 nextTask()
             if e.action == "pressed" and e.direction != "middle":
-                isGameLose = True
-                taskFailed()
-    elif i == squareScreen:
-        for e in sh.stick.get_events():
-            if e.action == "pressed" and e.direction == "left":
-                taskDone()
-                nextTask()
-            if e.action == "pressed" and e.direction != "left":
-                isGameLose = True
-                taskFailed()
-    elif i == circleScreen:
-        for e in sh.stick.get_events():
-            if e.action == "pressed" and e.direction == "right":
-                taskDone()
-                nextTask()
-            if e.action == "pressed" and e.direction != "right":
                 isGameLose = True
                 taskFailed()
     elif i == blueScreen:
         for e in sh.stick.get_events():
-            if e.action == "pressed" and e.direction == "down":
+            if e.action == "pressed" and e.direction == "middle":
                 taskDone()
                 nextTask()
-            if e.action == "pressed" and e.direction != "down":
+            if e.action == "pressed" and e.direction != "middle":
                 isGameLose = True
                 taskFailed()
     elif i == twoSquareScreen:
         for e in sh.stick.get_events():
-            if e.action == "pressed" and e.direction == "middle":
-                taskDone()
-                nextTask()
-            if e.action == "pressed" and e.direction != "middle":
-                isGameLose = True
-                taskFailed()
+            if e.action == "pressed":
+                n = e.direction
+                btnSeq.append(n)
+                if e.action == "pressed" and e.direction == "middle":
+                    btnSeq.pop()
+                    if btnSeq == twoSquareSeq:
+                        taskDone()
+                        nextTask()
+                    else:
+                        isGameLose = True
+                        taskFailed()
     elif i == yellowScreen:
         for e in sh.stick.get_events():
-            if e.action == "pressed" and e.direction == "middle":
-                taskDone()
-                nextTask()
-            if e.action == "pressed" and e.direction != "middle":
-                isGameLose = True
-                taskFailed()
+            if e.action == "pressed":
+                n = e.direction
+                btnSeq.append(n)
+                if e.action == "pressed" and e.direction == "middle":
+                    btnSeq.pop() 
+                    if btnSeq == yellowSeq:
+                        taskDone()
+                        nextTask()
+                    else:
+                        isGameLose = True
+                        taskFailed()
     elif i == orangeScreen:
         for e in sh.stick.get_events():
             if e.action == "pressed" and e.direction == "middle":
@@ -291,12 +314,17 @@ def task(i):
                 taskFailed()
     elif i == crossScreen:
         for e in sh.stick.get_events():
-            if e.action == "pressed" and e.direction == "middle":
-                taskDone()
-                nextTask()
-            if e.action == "pressed" and e.direction != "middle":
-                isGameLose = True
-                taskFailed()
+            if e.action == "pressed":
+                n = e.direction
+                btnSeq.append(n)
+                if e.action == "pressed" and e.direction == "middle":
+                    btnSeq.pop()
+                    if btnSeq == crossSeq:
+                        taskDone()
+                        nextTask()
+                    else:
+                        isGameLose = True
+                        taskFailed()
     elif i == twoLinesScreen:
         for e in sh.stick.get_events():
             if e.action == "pressed" and e.direction == "middle":
@@ -307,12 +335,17 @@ def task(i):
                 taskFailed()
     elif i == xScreen:
         for e in sh.stick.get_events():
-            if e.action == "pressed" and e.direction == "middle":
-                taskDone()
-                nextTask()
-            if e.action == "pressed" and e.direction != "middle":
-                isGameLose = True
-                taskFailed()
+            if e.action == "pressed":
+                n = e.direction
+                btnSeq.append(n)
+                if e.action == "pressed" and e.direction == "middle":
+                    btnSeq.pop() 
+                    if btnSeq == xSeq:
+                        taskDone()
+                        nextTask()
+                    else:
+                        isGameLose = True
+                        taskFailed()
 
 
 
