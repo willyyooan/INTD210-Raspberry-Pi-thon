@@ -193,13 +193,17 @@ def taskDone():
     
 
 def taskFailed():
+    global isGameLose
     isGameLose = True
     print("BOOM! You died :(")
     while isGameLose == True:
+        global isGameOn
         isGameOn = False
         sh.set_pixels(loseScreen)
         
 def gameWin():
+    global isGameOn
+    global isGameWin
     isGameWin = True
     isGameOn = False
     sh.set_pixels(winScreen)
@@ -213,6 +217,7 @@ def gameWin():
     sh.set_pixels(winScreen)
 
 def task(i):
+    global isGameLose
     sh.set_pixels(i)
     if i == triangleScreen:
         for e in sh.stick.get_events():
