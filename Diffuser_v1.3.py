@@ -212,9 +212,9 @@ def tiltLeft():
     y = acceleration ["y"]
     z = acceleration ["z"]
     
-    x=round(x,0)
-    y=round(y,0)
-    z=round(z,0)
+    x = round(x,0)
+    y = round(y,0)
+    z = round(z,0)
     
     if x == -1:
         taskDone()
@@ -231,19 +231,27 @@ def upsideDown():
     y = acceleration ["y"]
     z = acceleration ["z"]
     
-    x=round(x,0)
-    y=round(y,0)
-    z=round(z,0)
+    x = round(x,0)
+    y = round(y,0)
+    z = round(z,0)
     
-    if z == -1 or y == -1:
+    if z == -1:
         taskDone()
         nextTask()
         print("upside down")
     elif y == 0:
         pass
-    else:
-        taskFailed()
 
+def shake():
+    x, y, z = sh.get_accelerometer_raw().values()
+    
+    x = abs(x)
+    y = abs(y)
+    z = abs(z)
+     
+    if x > 2 or y > 2 or z > 2:
+        taskDone()
+        nextTask()
 
 def taskFailed():
     global isGameLose
@@ -342,13 +350,7 @@ def task(i):
                         taskFailed()
     
     elif i == orangeScreen:
-        for e in sh.stick.get_events():
-            if e.action == "pressed" and e.direction == "middle":
-                taskDone()
-                nextTask()
-            if e.action == "pressed" and e.direction != "middle":
-                isGameLose = True
-                taskFailed()
+        shake()
     
     elif i == crossScreen:
         for e in sh.stick.get_events():
