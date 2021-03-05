@@ -3,7 +3,7 @@ import time
 
 sense = SenseHat()
  
-sense. clear()
+sense.clear()
 
 g = (0, 255, 0)
 
