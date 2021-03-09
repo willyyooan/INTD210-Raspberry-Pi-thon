@@ -1,7 +1,4 @@
-#from sense_hat import SenseHat
-from time import sleep
 from guizero import App, Text, PushButton, Window
-#sh = SenseHat()
 
 ##VARIABLES##
 appW = 750 #width of the window
