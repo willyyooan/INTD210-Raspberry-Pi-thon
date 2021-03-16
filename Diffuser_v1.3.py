@@ -268,6 +268,7 @@ def gameWin():
     global isGameWin
     isGameWin = True
     isGameOn = False
+    del btnSeq[:] #resets list
     sh.set_pixels(winScreen)
     sleep(qrtrSec)
     sh.clear()
