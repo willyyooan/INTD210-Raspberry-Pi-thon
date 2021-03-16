@@ -1,7 +1,11 @@
 from sense_hat import SenseHat
 from time import sleep
 import random
+import paho.mqtt.publish as pub
+import paho.mqtt.client as mqtt
+
 sh = SenseHat()
+client = mqtt.Client()
 
 sh.clear()
 
@@ -189,6 +193,17 @@ xSeq = [up, dn, dn, lt, lt, lt, rt, rt, rt, rt]
 btnSeq = []
 
 ##FUNCTIONS##
+def on_connect(client, userdata, flags, rc):
+    if rc == 0:
+        client.subscribe("Bomb")
+    else:
+        print(f"Connected fail with code {rc}")
+
+def on_message(client, userdata, msg):
+    if msg == "start":
+        return True
+
+
 def nextTask():
     sh.clear()
     del btnSeq[:] #resets list
@@ -385,25 +400,39 @@ def task(i):
 
 
 
-
+#MQTT stuff
+client.on_connect = on_connect
+client.on_message = on_message
+client.connect("broker.hivemq.com", 1883, 60)
+client.loop_start()
 
 
 
 ##GAME##
+# while True:
+#     if isGameOn == False:
+#         sh.set_pixels(flashScreen)
+#         #MVP 1: press the joystick to begin 
+#         #MVP 2: MQTT, the GUI will start the game
+#         for e in sh.stick.get_events():
+#             if e.action == "pressed" and e.direction == "middle":
+#                 sh.clear()
+#                 isGameOn = True
+#                 break
+#             break
+#     elif isGameOn == True:
+#       break
+
 while True:
     if isGameOn == False:
         sh.set_pixels(flashScreen)
         #MVP 1: press the joystick to begin 
         #MVP 2: MQTT, the GUI will start the game
-        for e in sh.stick.get_events():
-            if e.action == "pressed" and e.direction == "middle":
-                sh.clear()
-                isGameOn = True
-                break
+        if on_message() == True:
+            print("start game")
             break
     elif isGameOn == True:
       break
-
 
 
 taskArr = ["task_1", "task_2", "task_3", "task_4", "task_5", "task_6", "task_7", "task_8", "task_9", "task_10"]
