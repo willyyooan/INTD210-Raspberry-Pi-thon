@@ -355,8 +355,8 @@ while True:
     sLose = Window(startScr, title="You Lose!", height=appH, width=appW, bg=(255, 0, 0))
     sLose.hide() #hides this window until player clicks on start button
     Text(sLose, text="", size=50) #spacer
-    Text(sLose, text="BOMB DEFUSED", size=50)
-    Text(sLose, text="Great work!", size=25)
+    Text(sLose, text="BOMB EXPLODED", size=50)
+    Text(sLose, text="WE DIED!", size=25)
     Text(sLose, text="", size=25) #spacer
     menuLoseBtn = PushButton(sLose, text="Main Menu", command=mainMenu)
     menuLoseBtn.bg = "#e0e0e0" #light grey
