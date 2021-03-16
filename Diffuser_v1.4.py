@@ -1,11 +1,7 @@
 from sense_hat import SenseHat
 from time import sleep
 import random
-import paho.mqtt.publish as pub
-import paho.mqtt.client as mqtt
-
 sh = SenseHat()
-client = mqtt.Client()
 
 sh.clear()
 
@@ -193,22 +189,6 @@ xSeq = [up, dn, dn, lt, lt, lt, rt, rt, rt, rt]
 btnSeq = []
 
 ##FUNCTIONS##
-def on_connect(client, userdata, flags, rc):
-    if rc == 0:
-        client.subscribe("Bomb")
-    else:
-        print(f"Connected fail with code {rc}")
-
-def on_message(client, userdata, msg):
-    global isGameOn
-    global isGameLose
-    if msg.payload.decode() == "start":
-        isGameOn = True
-    if msg.payload.decode() == "menu":
-        isGameOn = False
-        isGameLose = False
-
-
 def nextTask():
     sh.clear()
     del btnSeq[:] #resets list
@@ -282,13 +262,13 @@ def taskFailed():
         global isGameOn
         isGameOn = False
         sh.set_pixels(loseScreen)
-        pub.single("Bomb","Lose",hostname="broker.hivemq.com")
         
 def gameWin():
     global isGameOn
     global isGameWin
     isGameWin = True
     isGameOn = False
+    del btnSeq[:] #resets list
     sh.set_pixels(winScreen)
     sleep(qrtrSec)
     sh.clear()
@@ -406,68 +386,93 @@ def task(i):
 
 
 
-#MQTT stuff
-client.on_connect = on_connect
-client.on_message = on_message
-client.connect("broker.hivemq.com", 1883, 60)
-client.loop_start()
+def timer():
+    #timer
+    g = (0, 255, 0)
+    r = (255, 0, 0)
+    x = (0, 0, 0)
+
+    s = 8
+
+    timer = []
+    for i in range(64):
+        if i < s:
+            timer.append(g)
+        else:
+            timer.append(x)
+
+    sh.set_pixels(timer)
+
+    for i in range(0, s):
+        sleep(2.6)
+        timer[i] = r
+        sh.set_pixels(timer)
 
 
 
 ##GAME##
 while True:
-    taskCount = 0
-
-    while True:
-        if isGameOn == False:
-            sh.set_pixels(flashScreen)
-            #MVP 1: press the joystick to begin 
-            #MVP 2: MQTT, the GUI will start the game
-        elif isGameOn == True:
+    if isGameOn == False:
+        sh.set_pixels(flashScreen)
+        #MVP 1: press the joystick to begin 
+        #MVP 2: MQTT, the GUI will start the game
+        for e in sh.stick.get_events():
+            if e.action == "pressed" and e.direction == "middle":
+                sh.clear()
+                isGameOn = True
+                break
             break
+    elif isGameOn == True:
+      break
 
 
-    taskArr = ["task_1", "task_2", "task_3", "task_4", "task_5", "task_6", "task_7", "task_8", "task_9", "task_10"]
-    random.shuffle(taskArr)
 
-    while isGameOn == True:
+taskArr = ["task_1", "task_2", "task_3", "task_4", "task_5", "task_6", "task_7", "task_8", "task_9", "task_10"]
+random.shuffle(taskArr)
+
+#game loop
+while isGameOn == True:
+    
+    
+    
+    if taskArr[0] == "task_1": #press 3 times
+        task(triangleScreen) 
         
+    elif taskArr[0] == "task_2": #left
+        task(squareScreen)
+
+    elif taskArr[0] == "task_3": #right
+        task(circleScreen)
+
+    elif taskArr[0] == "task_4": #down
+        task(blueScreen)
+
+    elif taskArr[0] == "task_5": #middle
+        task(twoSquareScreen)
+
+    elif taskArr[0] == "task_6":
+        task(yellowScreen)
+
+    elif taskArr[0] == "task_7":
+        task(orangeScreen)
+
+    elif taskArr[0] == "task_8":
+        task(crossScreen)
+
+    elif taskArr[0] == "task_9":
+        task(twoLinesScreen)
+
+    elif taskArr[0] == "task_10":
+        task(xScreen)
         
-        
-        if taskArr[0] == "task_1": #press 3 times
-            task(triangleScreen) 
-            
-        elif taskArr[0] == "task_2": #left
-            task(squareScreen)
+    #task counter condition    
+    if taskCount == 4:
+        gameWin()
+        break
+    else:
+        continue
 
-        elif taskArr[0] == "task_3": #right
-            task(circleScreen)
 
-        elif taskArr[0] == "task_4": #down
-            task(blueScreen)
-
-        elif taskArr[0] == "task_5": #middle
-            task(twoSquareScreen)
-
-        elif taskArr[0] == "task_6":
-            task(yellowScreen)
-
-        elif taskArr[0] == "task_7":
-            task(orangeScreen)
-
-        elif taskArr[0] == "task_8":
-            task(crossScreen)
-
-        elif taskArr[0] == "task_9":
-            task(twoLinesScreen)
-
-        elif taskArr[0] == "task_10":
-            task(xScreen)
-            
-        #task counter condition    
-        if taskCount == 4:
-            pub.single("Bomb","Win",hostname="broker.hivemq.com")
-            gameWin()
-        else:
-            continue
-
+print("out of loop")
+sleep(2)
+sh.clear()

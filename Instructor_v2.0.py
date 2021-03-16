@@ -22,9 +22,9 @@ def on_connect(client, userdata, flags, rc):
         print(f"Connected fail with code {rc}")
 
 def on_message(client, userdata, msg):
-    if on_message == "win":
+    if msg.payload.decode() == "Win":
         sWin.show()
-    elif on_message == "lose":
+    if msg.payload.decode() == "Lose":
         sLose.show()
 
 
@@ -98,14 +98,31 @@ def windowClose():
 def winScreen():
     sWin.show()
 
+def loseScreen():
+    sLose.show()
+
 def mainMenu():
-    startScr.destroy()
+    startScr.show()
+    sLose.hide()
+    sWin.hide()
+    s0.hide()
+    s1.hide()
+    s2.hide()
+    s3.hide()
+    s4.hide()
+    s5.hide()
+    s6.hide()
+    s7.hide()
+    s8.hide()
+    s9.hide()
+    pub.single("Bomb","menu",hostname="broker.hivemq.com")
 
 
 #MQTT stuff
 client.on_connect = on_connect
 client.on_message = on_message
 client.connect("broker.hivemq.com", 1883, 60)
+client.loop_start()
 
 
 while True:
@@ -116,7 +133,6 @@ while True:
         width=appW, 
         bg=(112,112,112),
         )
-
     title = Text(startScr, #Main Welcome Text
         text="Welcome to the Bomb Defusing Game", 
         size="25",
@@ -160,6 +176,8 @@ while True:
     endBtn.width = 10
     endBtn.height = 1
     endBtn.text_color = "#ffffff" #white
+
+
 
     #SECOND WINDOW
     #TRIANGLE
@@ -334,16 +352,16 @@ while True:
     menuBtn.bg = "#e0e0e0" #light grey
 
     #LOSE SCREEN
-    sLose = Window(startScr, title="You Win!", height=appH, width=appW, bg=(255, 0, 0))
+    sLose = Window(startScr, title="You Lose!", height=appH, width=appW, bg=(255, 0, 0))
     sLose.hide() #hides this window until player clicks on start button
     Text(sLose, text="", size=50) #spacer
     Text(sLose, text="BOMB DEFUSED", size=50)
     Text(sLose, text="Great work!", size=25)
     Text(sLose, text="", size=25) #spacer
-    menuBtn = PushButton(sLose, text="Main Menu", command=mainMenu)
-    quitbtn = PushButton(sLose, text="Give Up", command=windowClose)
-    menuBtn.bg = "#e0e0e0" #light grey
+    menuLoseBtn = PushButton(sLose, text="Main Menu", command=mainMenu)
+    menuLoseBtn.bg = "#e0e0e0" #light grey
     
+
     startScr.display()
 
     if windowCloseBool == True:
