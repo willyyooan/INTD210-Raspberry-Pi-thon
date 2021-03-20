@@ -17,15 +17,11 @@ sh = SenseHat()
 
 # sWin.display()
 
-squareScreen = [
-    x, x, x, x, x, x, x, x,
-    x, w, w, w, w, w, w, x,
-    x, w, x, x, x, x, w, x,
-    x, w, x, x, x, x, w, x,
-    x, w, x, x, x, x, w, x,
-    x, w, x, x, x, x, w, x,
-    x, w, w, w, w, w, w, x,
-    x, x, x, x, x, x, x, x
-]
+g = [0, 255, 0]
+r = [255, 0, 0]
 
-sh.set_pixels(squareScreen)
+
+
+
+# set_pixels(array)
+# set_pixel(x,y,colour)

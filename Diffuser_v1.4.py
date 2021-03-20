@@ -385,28 +385,32 @@ def task(i):
                         taskFailed()
 
 
-
 def timer():
     #timer
-    g = (0, 255, 0)
-    r = (255, 0, 0)
-    x = (0, 0, 0)
-
     s = 8
 
+    sh.set_pixel(0, 0, g)
+    sh.set_pixel(1, 0, g)
+    sh.set_pixel(2, 0, g)
+    sh.set_pixel(3, 0, g)
+    sh.set_pixel(4, 0, g)
+    sh.set_pixel(5, 0, g)
+    sh.set_pixel(6, 0, g)
+    sh.set_pixel(7, 0, g)
+
     timer = []
+
     for i in range(64):
         if i < s:
             timer.append(g)
         else:
             timer.append(x)
 
-    sh.set_pixels(timer)
-
     for i in range(0, s):
-        sleep(2.6)
+        sleep(2)
         timer[i] = r
-        sh.set_pixels(timer)
+        print(str(i))
+        sh.set_pixel(i, 0, r)
 
 
 
@@ -437,33 +441,43 @@ while isGameOn == True:
     
     if taskArr[0] == "task_1": #press 3 times
         task(triangleScreen) 
+        timer()
         
     elif taskArr[0] == "task_2": #left
         task(squareScreen)
+        timer()
 
     elif taskArr[0] == "task_3": #right
         task(circleScreen)
+        timer()
 
     elif taskArr[0] == "task_4": #down
         task(blueScreen)
+        timer()
 
     elif taskArr[0] == "task_5": #middle
         task(twoSquareScreen)
+        timer()
 
     elif taskArr[0] == "task_6":
         task(yellowScreen)
+        timer()
 
     elif taskArr[0] == "task_7":
         task(orangeScreen)
+        timer()
 
     elif taskArr[0] == "task_8":
         task(crossScreen)
+        timer()
 
     elif taskArr[0] == "task_9":
         task(twoLinesScreen)
+        timer()
 
     elif taskArr[0] == "task_10":
         task(xScreen)
+        timer()
         
     #task counter condition    
     if taskCount == 4:
@@ -471,6 +485,9 @@ while isGameOn == True:
         break
     else:
         continue
+
+
+
 
 
 print("out of loop")

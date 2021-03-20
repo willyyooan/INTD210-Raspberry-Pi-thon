@@ -15,7 +15,7 @@ g = [0, 255, 0] #green
 x = [0, 0, 0] #blank
 w = [255, 255, 255]
 B = [0, 0, 255] #Blue
-O = [255, 180, 0] #Orange
+O = [135,206,250] #Light Blue. was called Orange
 Y = [255, 255, 0] #Yellow
                         
 
@@ -432,7 +432,30 @@ while True:
 
     while isGameOn == True:
         
-        
+        s = 8
+
+        # examples using (x, y, pixel)
+        sh.set_pixel(0, 0, g)
+        sh.set_pixel(1, 0, g)
+        sh.set_pixel(2, 0, g)
+        sh.set_pixel(3, 0, g)
+        sh.set_pixel(4, 0, g)
+        sh.set_pixel(5, 0, g)
+        sh.set_pixel(6, 0, g)
+        sh.set_pixel(7, 0, g)
+
+        timer = []
+
+        for i in range(64):
+            if i < s:
+                timer.append(g)
+            else:
+                timer.append(x)
+
+        for i in range(0, s):
+            sleep(2)
+            timer[i] = r
+            print(str(i))
         
         if taskArr[0] == "task_1": #press 3 times
             task(triangleScreen) 
