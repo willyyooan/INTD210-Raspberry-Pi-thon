@@ -299,7 +299,7 @@ while True:
     Text(s7, text="", size=10) #spacer
     Text(s7, text=if_text)
     Text(s7, text="", size=10) #spacer
-    Text(s7, text="All Orange", size=50)
+    Text(s7, text="All Light Blue", size=50)
     Text(s7, text="", size=10) #spacer
     Text(s7, text=instr)
     Text(s7, text="", size=15) #spacer

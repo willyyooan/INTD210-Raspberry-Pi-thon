@@ -1,6 +1,7 @@
 from sense_hat import SenseHat
 from time import sleep
 import random
+import threading
 sh = SenseHat()
 
 sh.clear()
@@ -283,6 +284,7 @@ def task(i):
     global isGameLose
     sh.set_pixels(i)
     if i == triangleScreen:
+        timer()
         for e in sh.stick.get_events():
             if e.action == "pressed":
                 n = e.direction
@@ -297,6 +299,7 @@ def task(i):
                         taskFailed()
     
     elif i == squareScreen:
+        timer()
         for e in sh.stick.get_events():
             if e.action == "pressed":
                 n = e.direction
@@ -311,6 +314,7 @@ def task(i):
                         taskFailed()
     
     elif i == circleScreen:
+        timer()
         for e in sh.stick.get_events():
             if e.action == "pressed" and e.direction == "middle":
                 taskDone()
@@ -320,9 +324,11 @@ def task(i):
                 taskFailed()
     
     elif i == blueScreen:
+        timer()
         tiltLeft()
     
     elif i == twoSquareScreen:
+        timer()
         for e in sh.stick.get_events():
             if e.action == "pressed":
                 n = e.direction
@@ -337,6 +343,7 @@ def task(i):
                         taskFailed()
 
     elif i == yellowScreen:
+        timer()
         for e in sh.stick.get_events():
             if e.action == "pressed":
                 n = e.direction
@@ -351,9 +358,11 @@ def task(i):
                         taskFailed()
     
     elif i == orangeScreen:
+        timer()
         shake()
     
     elif i == crossScreen:
+        timer()
         for e in sh.stick.get_events():
             if e.action == "pressed":
                 n = e.direction
@@ -368,9 +377,11 @@ def task(i):
                         taskFailed()
     
     elif i == twoLinesScreen:
+        timer()
         upsideDown()
     
     elif i == xScreen:
+        timer()
         for e in sh.stick.get_events():
             if e.action == "pressed":
                 n = e.direction
@@ -384,8 +395,7 @@ def task(i):
                         isGameLose = True
                         taskFailed()
 
-
-def timer():
+def timerDisp():
     #timer
     s = 8
 
@@ -398,19 +408,20 @@ def timer():
     sh.set_pixel(6, 0, g)
     sh.set_pixel(7, 0, g)
 
-    timer = []
-
-    for i in range(64):
-        if i < s:
-            timer.append(g)
-        else:
-            timer.append(x)
-
     for i in range(0, s):
-        sleep(2)
-        timer[i] = r
+        sleep(0.5)
         print(str(i))
         sh.set_pixel(i, 0, r)
+
+def timer():
+    timer = 0
+    limit = 0.01
+    
+    timer = timer + limit
+    print (timer)
+    
+    if timer > 10: #20 SECONDS
+        taskFailed()
 
 
 
@@ -436,49 +447,42 @@ random.shuffle(taskArr)
 
 #game loop
 while isGameOn == True:
+    timer()
     
-    
-    
+    # if timer < 10:
     if taskArr[0] == "task_1": #press 3 times
         task(triangleScreen) 
-        timer()
         
     elif taskArr[0] == "task_2": #left
         task(squareScreen)
-        timer()
 
     elif taskArr[0] == "task_3": #right
         task(circleScreen)
-        timer()
 
     elif taskArr[0] == "task_4": #down
         task(blueScreen)
-        timer()
 
     elif taskArr[0] == "task_5": #middle
         task(twoSquareScreen)
-        timer()
 
     elif taskArr[0] == "task_6":
         task(yellowScreen)
-        timer()
 
     elif taskArr[0] == "task_7":
         task(orangeScreen)
-        timer()
 
     elif taskArr[0] == "task_8":
         task(crossScreen)
-        timer()
 
     elif taskArr[0] == "task_9":
         task(twoLinesScreen)
-        timer()
 
     elif taskArr[0] == "task_10":
         task(xScreen)
-        timer()
-        
+
+
+    
+
     #task counter condition    
     if taskCount == 4:
         gameWin()
