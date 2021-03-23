@@ -421,7 +421,6 @@ def task(i):
                     else:
                         isGameLose = True
                         taskFailed()
-    timerDisp()
 
 
 ##GAME##
@@ -445,52 +444,52 @@ random.shuffle(taskArr)
 
 print("timer is set to " + str(interval*8) + " seconds")
 
+timerDisp()
 
 #game loop
-while isGameOn == True and i < 7:
 
-    # continue
+while isGameOn == True:
 
-    # if timer < 10:
-    if taskArr[0] == "task_1": #press 3 times
-        task(triangleScreen) 
-        
-    elif taskArr[0] == "task_2": #left
-        task(squareScreen)
+    if i < 7:
+        if taskArr[0] == "task_1": #press 3 times
+            task(triangleScreen) 
+            
+        elif taskArr[0] == "task_2": #left
+            task(squareScreen)
 
-    elif taskArr[0] == "task_3": #right
-        task(circleScreen)
+        elif taskArr[0] == "task_3": #right
+            task(circleScreen)
 
-    elif taskArr[0] == "task_4": #down
-        task(blueScreen)
+        elif taskArr[0] == "task_4": #down
+            task(blueScreen)
 
-    elif taskArr[0] == "task_5": #middle
-        task(twoSquareScreen)
+        elif taskArr[0] == "task_5": #middle
+            task(twoSquareScreen)
 
-    elif taskArr[0] == "task_6":
-        task(yellowScreen)
+        elif taskArr[0] == "task_6":
+            task(yellowScreen)
 
-    elif taskArr[0] == "task_7":
-        task(orangeScreen)
+        elif taskArr[0] == "task_7":
+            task(orangeScreen)
 
-    elif taskArr[0] == "task_8":
-        task(crossScreen)
+        elif taskArr[0] == "task_8":
+            task(crossScreen)
 
-    elif taskArr[0] == "task_9":
-        task(twoLinesScreen)
+        elif taskArr[0] == "task_9":
+            task(twoLinesScreen)
 
-    elif taskArr[0] == "task_10":
-        task(xScreen)
-
+        elif taskArr[0] == "task_10":
+            task(xScreen)
 
 
 
-    #task counter condition    
-    if taskCount == 4:
-        gameWin()
-        break
-    else:
-        continue
+
+        #task counter condition    
+        if taskCount == 4:
+            gameWin()
+            break
+        else:
+            continue
 
 
 
