@@ -191,7 +191,7 @@ while True:
     Text(s0, text="", size=10) #spacer
     Text(s0, text=instr)
     Text(s0, text="", size=15) #spacer
-    Text(s0, text="Up, Down, Left, Right", size=25)
+    Text(s0, text="Up, Left, Right", size=25)
     Text(s0, text="", size=15) #spacer
     PushButton(s0, text="Next Page", command=gotoScreen1)
 

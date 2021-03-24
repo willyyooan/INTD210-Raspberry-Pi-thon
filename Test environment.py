@@ -1,17 +1,21 @@
-
-# import time
-
+import time
 
 
 
-# while True:
-#     startTime = time.time()
+while True:
+    t = time.perf_counter()
+    t = round(t)
+    print(t)
 
-#     endTime = time.time()
-#     elapsedTime = endTime - startTime
-#     print("Elapsed Time = %s" % elapsedTime)
+    # print('yesssssssssss')
 
-i = 0
+    if t >=  10:
+        print("10")
+        break
 
-if i < 7:
-    print("yes")
+    # if t > 10:
+    #     pass
+    # break
+
+
+print("yes")

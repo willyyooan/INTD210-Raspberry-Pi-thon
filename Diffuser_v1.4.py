@@ -444,7 +444,7 @@ random.shuffle(taskArr)
 
 print("timer is set to " + str(interval*8) + " seconds")
 
-timerDisp()
+
 
 #game loop
 
@@ -452,7 +452,7 @@ while isGameOn == True:
 
     if i < 7:
         if taskArr[0] == "task_1": #press 3 times
-            task(triangleScreen) 
+            task(triangleScreen)
             
         elif taskArr[0] == "task_2": #left
             task(squareScreen)
@@ -482,7 +482,7 @@ while isGameOn == True:
             task(xScreen)
 
 
-
+        
 
         #task counter condition    
         if taskCount == 4:

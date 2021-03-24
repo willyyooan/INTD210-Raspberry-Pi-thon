@@ -8,6 +8,7 @@ sh = SenseHat()
 client = mqtt.Client()
 
 sh.clear()
+sh.low_light = True
 
 ##COLOURS##
 r = [255, 0, 0] #red
