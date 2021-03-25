@@ -174,12 +174,6 @@ isGameLose = False
 isGameWin = False
 timerOn = False
 
-global i
-i = 0
-
-global start
-start = 0
-
 qrtrSec = 0.25
 halfSec = 0.5
 fullSec = 1
@@ -414,6 +408,11 @@ def task(i):
 def timer(): 
 
     if timerOn == True:
+        if t >= 0:
+            second = t
+            print(str(second) + " second(s) has passed")
+            sh.set_pixel(0, 0, r)
+
         if t >= 3:
             second = t
             print(str(second) + " second(s) has passed")
@@ -422,64 +421,36 @@ def timer():
         if t >= 6:
             second = t
             print(str(second) + " second(s) has passed")
-            sh.set_pixel(0, 0, r)
             sh.set_pixel(1, 0, r)
         
         if t >= 9:
             second = t
             print(str(second) + " second(s) has passed")
-            sh.set_pixel(0, 0, r)
-            sh.set_pixel(1, 0, r)
             sh.set_pixel(2, 0, r)
         
         if t >= 12:
             second = t
             print(str(second) + " second(s) has passed")
-            sh.set_pixel(0, 0, r)
-            sh.set_pixel(1, 0, r)
-            sh.set_pixel(2, 0, r)
             sh.set_pixel(3, 0, r)
         
         if t >= 15:
             second = t
             print(str(second) + " second(s) has passed")
-            sh.set_pixel(0, 0, r)
-            sh.set_pixel(1, 0, r)
-            sh.set_pixel(2, 0, r)
-            sh.set_pixel(3, 0, r)
             sh.set_pixel(4, 0, r)
         
         if t >= 18:
             second = t
             print(str(second) + " second(s) has passed")
-            sh.set_pixel(0, 0, r)
-            sh.set_pixel(1, 0, r)
-            sh.set_pixel(2, 0, r)
-            sh.set_pixel(3, 0, r)
-            sh.set_pixel(4, 0, r)
             sh.set_pixel(5, 0, r)
         
         if t >= 21:
             second = t
             print(str(second) + " second(s) has passed")
-            sh.set_pixel(0, 0, r)
-            sh.set_pixel(1, 0, r)
-            sh.set_pixel(2, 0, r)
-            sh.set_pixel(3, 0, r)
-            sh.set_pixel(4, 0, r)
-            sh.set_pixel(5, 0, r)
             sh.set_pixel(6, 0, r)
         
         if t >= 24:
             second = t
             print(str(second) + " second(s) has passed. Time's up!")
-            sh.set_pixel(0, 0, r)
-            sh.set_pixel(1, 0, r)
-            sh.set_pixel(2, 0, r)
-            sh.set_pixel(3, 0, r)
-            sh.set_pixel(4, 0, r)
-            sh.set_pixel(5, 0, r)
-            sh.set_pixel(6, 0, r)
             sh.set_pixel(7, 0, r)
             taskFailed()
 
@@ -508,7 +479,7 @@ random.shuffle(taskArr)
 start = time()
 
 while isGameOn == True:
-    # timerOn = True
+    timerOn = True
 
     t = round(time() - start)
     
@@ -550,6 +521,8 @@ while isGameOn == True:
         break
     else:
         continue
+
+    timer()
 
 
 

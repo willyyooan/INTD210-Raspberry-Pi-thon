@@ -168,10 +168,12 @@ xScreen = [
 global isGameOn
 global isGameLose
 global isGameWin
+global timerOn
 
 isGameOn = False
 isGameLose = False
 isGameWin = False
+timerOn = False
 
 qrtrSec = 0.25
 halfSec = 0.5
@@ -304,6 +306,7 @@ def task(i):
     global isGameLose
     sh.set_pixels(i)
     if i == triangleScreen:
+        timer()
         for e in sh.stick.get_events():
             if e.action == "pressed":
                 n = e.direction
@@ -318,6 +321,7 @@ def task(i):
                         taskFailed()
     
     elif i == squareScreen:
+        timer()
         for e in sh.stick.get_events():
             if e.action == "pressed":
                 n = e.direction
@@ -332,6 +336,7 @@ def task(i):
                         taskFailed()
     
     elif i == circleScreen:
+        timer()
         for e in sh.stick.get_events():
             if e.action == "pressed" and e.direction == "middle":
                 taskDone()
@@ -341,9 +346,11 @@ def task(i):
                 taskFailed()
     
     elif i == blueScreen:
+        timer()
         tiltLeft()
     
     elif i == twoSquareScreen:
+        timer()
         for e in sh.stick.get_events():
             if e.action == "pressed":
                 n = e.direction
@@ -358,6 +365,7 @@ def task(i):
                         taskFailed()
 
     elif i == yellowScreen:
+        timer()
         for e in sh.stick.get_events():
             if e.action == "pressed":
                 n = e.direction
@@ -372,9 +380,11 @@ def task(i):
                         taskFailed()
     
     elif i == orangeScreen:
+        timer()
         shake()
     
     elif i == crossScreen:
+        timer()
         for e in sh.stick.get_events():
             if e.action == "pressed":
                 n = e.direction
@@ -389,9 +399,11 @@ def task(i):
                         taskFailed()
     
     elif i == twoLinesScreen:
+        timer()
         upsideDown()
     
     elif i == xScreen:
+        timer()
         for e in sh.stick.get_events():
             if e.action == "pressed":
                 n = e.direction
@@ -406,7 +418,6 @@ def task(i):
                         taskFailed()
 
 def timer(): 
-
     if timerOn == True:
         if t >= 0:
             second = t
