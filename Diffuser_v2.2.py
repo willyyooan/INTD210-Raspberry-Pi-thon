@@ -423,46 +423,55 @@ def timer():
             second = t
             print(str(second) + " second(s) has passed")
             sh.set_pixel(0, 0, r)
+            sleep(0.1)
 
         if t >= 3:
             second = t
             print(str(second) + " second(s) has passed")
             sh.set_pixel(0, 0, r)
+            sleep(0.1)
         
         if t >= 6:
             second = t
             print(str(second) + " second(s) has passed")
             sh.set_pixel(1, 0, r)
+            sleep(0.1)
         
         if t >= 9:
             second = t
             print(str(second) + " second(s) has passed")
             sh.set_pixel(2, 0, r)
+            sleep(0.1)
         
         if t >= 12:
             second = t
             print(str(second) + " second(s) has passed")
             sh.set_pixel(3, 0, r)
+            sleep(0.1)
         
         if t >= 15:
             second = t
             print(str(second) + " second(s) has passed")
             sh.set_pixel(4, 0, r)
+            sleep(0.1)
         
         if t >= 18:
             second = t
             print(str(second) + " second(s) has passed")
             sh.set_pixel(5, 0, r)
+            sleep(0.1)
         
         if t >= 21:
             second = t
             print(str(second) + " second(s) has passed")
             sh.set_pixel(6, 0, r)
+            sleep(0.1)
         
         if t >= 24:
             second = t
             print(str(second) + " second(s) has passed. Time's up!")
             sh.set_pixel(7, 0, r)
+            sleep(0.1)
             taskFailed()
 
 #MQTT stuff

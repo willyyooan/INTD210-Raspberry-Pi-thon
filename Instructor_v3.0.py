@@ -103,6 +103,7 @@ def loseScreen():
 
 def mainMenu():
     startScr.show()
+    sHowTo.hide()
     sLose.hide()
     sWin.hide()
     s0.hide()
@@ -117,6 +118,8 @@ def mainMenu():
     s9.hide()
     pub.single("Bomb","menu",hostname="broker.hivemq.com")
 
+def howTo():
+    sHowTo.show()
 
 #MQTT stuff
 client.on_connect = on_connect
@@ -159,6 +162,19 @@ while True:
     startBtn.width = 25
     startBtn.height = 1
     startBtn.text_size = 15
+
+    Text(startScr, text=" ", size=5)
+
+    howToBtn = PushButton(startScr, 
+        text="How to Play", 
+        command=howTo,
+        padx=0,
+        pady=0,
+        )
+    howToBtn.bg = "#e0e0e0" #light grey
+    howToBtn.width = 25
+    howToBtn.height = 1
+    howToBtn.text_size = 15
 
     endBtnSpacer = Text(startScr,
         text=" ",
@@ -283,7 +299,7 @@ while True:
     Text(s6, text="", size=10) #spacer
     Text(s6, text=if_text)
     Text(s6, text="", size=10) #spacer
-    Text(s6, text="All Yellow", size=50)
+    Text(s6, text="Full Yellow", size=50)
     Text(s6, text="", size=10) #spacer
     Text(s6, text=instr)
     Text(s6, text="", size=15) #spacer
@@ -299,7 +315,7 @@ while True:
     Text(s7, text="", size=10) #spacer
     Text(s7, text=if_text)
     Text(s7, text="", size=10) #spacer
-    Text(s7, text="All Light Blue", size=50)
+    Text(s7, text="Yellow and Blue Screen", size=50)
     Text(s7, text="", size=10) #spacer
     Text(s7, text=instr)
     Text(s7, text="", size=15) #spacer
@@ -362,8 +378,33 @@ while True:
     menuLoseBtn.bg = "#e0e0e0" #light grey
     
     #INSTRUCTION SCREEN
-    sHowTo = Window(startScr, title="How to Play", height=appH, width=appW, bg=appBG)
-    menuHowToBtn = PushButton(sLose, text="Main Menu", command=mainMenu)
+    sHowTo = Window(startScr, title="How to Play", height=appH+300, width=appW, bg=appBG)
+    sHowTo.hide()
+    Text(sHowTo, text="How to Play", color="#ffffff", size=25) #colour: white
+    Text(sHowTo, text="", size=10) #spacer
+    Text(sHowTo, text="Instructor", color="#ffffff", size=20) #colour: white
+    Text(sHowTo, text="If you are seeing this screen, you are the instructor!", color="#000000", size=15) #colour: black
+    Text(sHowTo, text="Your goal is to give instructions on what to do on the", color="#000000", size=15) #colour: black
+    Text(sHowTo, text="senseHat to the Difuser. You are only allowed to give", color="#000000", size=15) #colour: black
+    Text(sHowTo, text="verbal commands. No hand motions or drawings!", color="#000000", size=15) #colour: black
+    Text(sHowTo, text="", size=15) #spacer  
+    Text(sHowTo, text="Difuser", color="#ffffff", size=20) #colour: white
+    Text(sHowTo, text="The player with the SenseHat is the Difuser!", color="#000000", size=15) #colour: black
+    Text(sHowTo, text="Their goal is to listen to your instructions", color="#000000", size=15) #colour: black
+    Text(sHowTo, text="and do the correct sequence of actions on the", color="#000000", size=15) #colour: black
+    Text(sHowTo, text="SenseHat. The Difuser will have to press the", color="#000000", size=15) #colour: black
+    Text(sHowTo, text="joystick to confirm each time they complete a", color="#000000", size=15) #colour: black
+    Text(sHowTo, text="sequence", color="#000000", size=15) #colour: black
+    Text(sHowTo, text="", size=15) #spacer
+    Text(sHowTo, text="To Start", color="#ffffff", size=20) #colour: white
+    Text(sHowTo, text="The difuser can start their code and will see", color="#000000", size=15) #colour: black
+    Text(sHowTo, text="a full white screen on their SenseHat. Wait", color="#000000", size=15) #colour: black
+    Text(sHowTo, text="for the Instructor to start the game. Once", color="#000000", size=15) #colour: black
+    Text(sHowTo, text="the Instructor presses the 'Start Game' button,", color="#000000", size=15) #colour: black
+    Text(sHowTo, text="the game will start on both sides", color="#000000", size=15) #colour: black
+    Text(sHowTo, text="*if you lose, you have to press the 'Main Menu' button a few times to close the losing screen*", color="#000000", size=10) #colour: black
+    Text(sHowTo, text="", size=15) #spacer
+    menuHowToBtn = PushButton(sHowTo, text="Main Menu", command=mainMenu)
     menuHowToBtn.bg = "#e0e0e0" #light grey
 
     startScr.display()
