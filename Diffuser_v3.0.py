@@ -425,49 +425,49 @@ def timer():
             sh.set_pixel(0, 0, r)
             sleep(0.1)
 
-        if t >= 8:
+        if t >= 11:
             second = t
             print(str(second) + " second(s) has passed")
             sh.set_pixel(0, 0, r)
             sleep(0.1)
         
-        if t >= 16:
+        if t >= 22:
             second = t
             print(str(second) + " second(s) has passed")
             sh.set_pixel(1, 0, r)
             sleep(0.1)
         
-        if t >= 24:
+        if t >= 33:
             second = t
             print(str(second) + " second(s) has passed")
             sh.set_pixel(2, 0, r)
             sleep(0.1)
         
-        if t >= 32:
+        if t >= 44:
             second = t
             print(str(second) + " second(s) has passed")
             sh.set_pixel(3, 0, r)
             sleep(0.1)
         
-        if t >= 40:
+        if t >= 55:
             second = t
             print(str(second) + " second(s) has passed")
             sh.set_pixel(4, 0, r)
             sleep(0.1)
         
-        if t >= 48:
+        if t >= 66:
             second = t
             print(str(second) + " second(s) has passed")
             sh.set_pixel(5, 0, r)
             sleep(0.1)
         
-        if t >= 56:
+        if t >= 77:
             second = t
             print(str(second) + " second(s) has passed")
             sh.set_pixel(6, 0, r)
             sleep(0.1)
         
-        if t >= 64:
+        if t >= 88:
             second = t
             print(str(second) + " second(s) has passed. Time's up!")
             sh.set_pixel(7, 0, r)

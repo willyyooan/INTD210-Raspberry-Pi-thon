@@ -308,7 +308,7 @@ while True:
     PushButton(s6, text="Next Page", command=gotoScreen7)
 
     #NINTH WINDOW
-    #ALL ORANGE
+    #ALL YELLOW AND BLUE
     s7 = Window(startScr, title="Instructions", height=appH, width=appW, bg=appBG)
     s7.hide() #hides this window until player clicks on start button
     Text(s7, text="What is showing on the Bomb?", color="#ffffff", size=25) #colour: white
